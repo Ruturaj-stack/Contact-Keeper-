@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>LOCKATED Contact Keeper </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <div>
+        <h1>Contact Keeper</h1>
+        <p class="subtitle">Ye Application Contacts save karta hai</p>
+      </div>
+      <div class="header-actions">
+        <button id="addContactBtn" class="btn btn-primary">+ Add contact</button>
+        <button id="importDemoBtn" class="btn btn-ghost">Import demo users</button>
+        <button id="toggleViewBtn" class="btn btn-secondary">Switch to Kanban</button>
+      </div>
+    </header>
+
+    <main class="app-main" id="listView">
+      <!-- Form -->
+      <section class="panel panel-form">
+        <h2 id="formTitle">New contact</h2>
+        <form id="contactForm" novalidate>
+          <input type="hidden" id="contactId">
+
+          <div class="form-field">
+            <label for="name">Name <span class="req">*</span></label>
+            <input id="name" type="text" placeholder="e.g. Ruturaj Jagdale">
+            <p class="field-error" data-error-for="name"></p>
+          </div>
+
+          <div class="form-field">
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="e.g. ruturaj@example.com">
+            <p class="field-error" data-error-for="email"></p>
+          </div>
+
+          <div class="form-field">
+            <label for="phone">Phone</label>
+            <input id="phone" type="tel" maxlength="12" placeholder="e.g. 9876543210">
+            <p class="field-error" data-error-for="phone"></p>
+          </div>
+
+          <div class="form-field checkbox-field">
+            <label class="checkbox">
+              <input id="favorite" type="checkbox">
+              <span>Mark as favourite</span>
+            </label>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id="saveBtn">Save</button>
+            <button type="button" class="btn btn-secondary" id="cancelEditBtn">Cancel</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Contact list -->
+      <section class="panel panel-list">
+        <div class="list-header">
+          <h2>Contacts</h2>
+          <span class="meta" id="contactCountLabel">0 contacts</span>
+        </div>
+
+        <div id="emptyState" class="empty-state">
+          <p>No contacts yet.</p>
+          <p class="muted">Add a contact or import demo users.</p>
+        </div>
+
+        <div id="contactList" class="contact-list"></div>
+      </section>
+    </main>
+
+    <!-- Kanban View -->
+    <main class="kanban-wrapper" id="kanbanView" style="display:none;">
+      <section class="kanban-column" data-status="todo">
+        <h3>To-Contact</h3>
+        <div class="kanban-dropzone" id="todoCol"></div>
+      </section>
+
+      <section class="kanban-column" data-status="progress">
+        <h3>In-Progress</h3>
+        <div class="kanban-dropzone" id="progressCol"></div>
+      </section>
+
+      <section class="kanban-column" data-status="done">
+        <h3>Completed</h3>
+        <div class="kanban-dropzone" id="doneCol"></div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <span>Ye Sab LocalStorage Me Save Kiya Gaya Hai </span>
+      <span class="meta">Pichla import:   <span id="lastSyncLabel">  Ab tak Import Kiya hi nahi Apne</span></span>
+    </footer>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
