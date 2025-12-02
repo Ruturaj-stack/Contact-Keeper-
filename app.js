@@ -256,7 +256,7 @@ function dropCard(e) {
   contacts = contacts.map(c => c.id === id ? { ...c, status: newStatus, dirty: true } : c);
   saveToStorage();
   renderKanban();
-  showToast("Moved");
+  showToast("Hogaya Change");
 }
 
 // ---------- TOGGLE VIEW ----------
@@ -348,3 +348,36 @@ function showToast(msg, err = false) {
   dom.toast.className = `toast show ${err ? "error" : ""}`;
   setTimeout(() => dom.toast.className = "toast", 2500);
 }
+
+// ---------------- LOGIN AUTH ----------------
+document.addEventListener("DOMContentLoaded", () => {
+  const loggedIn = localStorage.getItem("loggedIn");
+
+  if (loggedIn === "true") {
+    document.getElementById("loginScreen").style.display = "none";
+    document.getElementById("appShell").style.display = "flex";
+  }
+
+  document.getElementById("loginForm").addEventListener("submit", loginUser);
+
+  const logoutBtn = document.getElementById("logoutBtn");
+  logoutBtn.addEventListener("click", () => {
+    localStorage.removeItem("loggedIn");
+    location.reload();
+  });
+});
+
+function loginUser(e) {
+  e.preventDefault();
+
+  const user = document.getElementById("loginUser").value;
+  const pass = document.getElementById("loginPass").value;
+
+  if (user === "ruturaj" && pass === "1212") {
+    localStorage.setItem("loggedIn", "true");
+    location.reload();
+  } else {
+    alert("Invalid Username / Password");
+  }
+}
+
